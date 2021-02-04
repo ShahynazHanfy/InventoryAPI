@@ -1,0 +1,5 @@
+D:\Inventory\InventoryAPI\InventoryAPI\InventoryAPI\obj\Debug\netcoreapp3.1\InventoryAPI.csprojAssemblyReference.cache
+D:\Inventory\InventoryAPI\InventoryAPI\InventoryAPI\obj\Debug\netcoreapp3.1\InventoryAPI.AssemblyInfoInputs.cache
+D:\Inventory\InventoryAPI\InventoryAPI\InventoryAPI\obj\Debug\netcoreapp3.1\InventoryAPI.AssemblyInfo.cs
+D:\Inventory\InventoryAPI\InventoryAPI\InventoryAPI\obj\Debug\netcoreapp3.1\InventoryAPI.csproj.CoreCompileInputs.cache
+D:\Inventory\InventoryAPI\InventoryAPI\InventoryAPI\obj\Debug\netcoreapp3.1\InventoryAPI.MvcApplicationPartsAssemblyInfo.cache
