@@ -24,7 +24,7 @@ namespace InventoryAPI.Controllers
 
         // GET: api/SubGroups
         [HttpGet]
-        public  IEnumerable<SubGroupDTO> GetSubGroups()
+        public IEnumerable<SubGroupDTO> GetSubGroups()
         {
             return _subGroupRepository.GetAll();
         }
@@ -33,7 +33,7 @@ namespace InventoryAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<SubGroupDTO> GetSubGroup(int id)
         {
-            var subGroup =  _subGroupRepository.GetById(id);
+            var subGroup = _subGroupRepository.GetById(id);
 
             if (subGroup == null)
             {
@@ -61,7 +61,7 @@ namespace InventoryAPI.Controllers
             }
             catch (DbUpdateConcurrencyException ex)
             {
-                 string msg =ex.Message;
+                string msg = ex.Message;
             }
 
             return NoContent();
@@ -98,5 +98,40 @@ namespace InventoryAPI.Controllers
         //{
         //    return _context.SubGroups.Any(e => e.Id == id);
         //}
+        [Route("GetGroupBySubGroupId/{subGroupId}")]
+        public ActionResult<SubGroupDTO> GetGroupBySubGroupId(int subGroupId)
+        {
+            return _subGroupRepository.GetGroupBySubGroupId(subGroupId);
+        }
+        [Route("GetSubGroupsByGroupId/{GroupId}")]
+
+        public IEnumerable<SubGroupDTO> GetSubGroupsByGroupId(int GroupId)
+        {
+            return _subGroupRepository.GetSubGroupsByGroupId(GroupId);
+        }
+
+        [HttpPut]
+        [Route("Active/{id}")]
+        public IActionResult PutSubGroupActivation(int id, SubGroupDTO subGroupDTO)
+        {
+            if (id != subGroupDTO.Id)
+            {
+                return BadRequest();
+            }
+
+            _subGroupRepository.UpdateActivaState(subGroupDTO);
+
+            try
+            {
+                _subGroupRepository.Save();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                string msg = ex.Message;
+            }
+
+            return NoContent();
+        }
+    
     }
 }

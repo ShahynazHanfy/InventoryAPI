@@ -1,6 +1,9 @@
 using InventoryAPI.Models;
+using InventoryAPI.Repositories.EmployeesRepository;
 using InventoryAPI.Repositories.GroupRepositories;
+using InventoryAPI.Repositories.ItemDocumentsRepositories;
 using InventoryAPI.Repositories.ItemRepositories;
+using InventoryAPI.Repositories.ItemStatusEmpRepositories;
 using InventoryAPI.Repositories.SubGroupRepositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,6 +47,11 @@ namespace InventoryAPI
             services.AddScoped<IGroupRepository, GroupRepository>();
             services.AddScoped<ISubGroupRepository, SubGroupRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IItemDocumentsRepository, ItemDocumentsRepository>();
+            //services.AddScoped<IEmployeeRepository,EmployeeRepository >();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IItemStatusEmpRepository, ItemStatusEmpRepository>();
+
             // For Identity  
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -91,13 +99,13 @@ namespace InventoryAPI
             app.UseStaticFiles(); // For the wwwroot folder.
 
 
-            //app.UseFileServer(new FileServerOptions
-            //{
-            //    FileProvider = new PhysicalFileProvider(
-            //        Path.Combine(env.ContentRootPath, "wwwroot")),
-            //    RequestPath = "/wwwroot",
-            //    EnableDirectoryBrowsing = true
-            //});
+            app.UseFileServer(new FileServerOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(env.ContentRootPath, "wwwroot")),
+                RequestPath = "/wwwroot",
+                EnableDirectoryBrowsing = true
+            });
 
             app.UseRouting();
 

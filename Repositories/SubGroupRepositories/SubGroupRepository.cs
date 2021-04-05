@@ -1,5 +1,6 @@
 ﻿using InventoryAPI.DTO;
 using InventoryAPI.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,9 @@ namespace InventoryAPI.Repositories.SubGroupRepositories
                 Id = e.Id,
                 SubGroupName = e.SubGroupName,
                 GroupName = e.Group.GroupName,
-                GroupId = e.GroupId
+                GroupId = e.GroupId,
+                Activation = e.Activation
+                
 
             }).ToList();
             return subGroups;
@@ -72,7 +75,8 @@ namespace InventoryAPI.Repositories.SubGroupRepositories
             {
                 Id = subGroupObj.Id,
                 SubGroupName = subGroupObj.SubGroupName,
-                GroupId = subGroupObj.GroupId
+                GroupId = subGroupObj.GroupId,
+                Activation = subGroupObj.Activation
             };
 
             if (subGroupDTO == null)
@@ -94,6 +98,35 @@ namespace InventoryAPI.Repositories.SubGroupRepositories
             SubGroup.GroupId = subGroupDTO.GroupId;
             SubGroup.SubGroupName = subGroupDTO.SubGroupName;
             _context.Entry(SubGroup).State = EntityState.Modified;
+        }
+        public SubGroupDTO GetGroupBySubGroupId(int subGroupId)
+        {
+            return _context.SubGroups.Include(s => s.Group).Where(s => s.Id == subGroupId).Select(sub => new SubGroupDTO
+            {
+                GroupId = sub.GroupId,
+                GroupName = sub.Group.GroupName
+            }).FirstOrDefault();
+            
+        }
+
+        public void UpdateActivaState(SubGroupDTO subGroupDTO)
+        {
+             var SubGroupobj = new SubGroup();
+            SubGroupobj.Id = subGroupDTO.Id;
+            SubGroupobj.GroupId = subGroupDTO.GroupId;
+            SubGroupobj.SubGroupName = subGroupDTO.SubGroupName;
+            SubGroupobj.Activation = subGroupDTO.Activation;
+            _context.Entry(SubGroupobj).State = EntityState.Modified;
+        }
+
+        public IEnumerable<SubGroupDTO> GetSubGroupsByGroupId(int GroupId)
+        {
+            var subGroups = _context.SubGroups.Include(s => s.Group).Where(s => s.GroupId == GroupId).Select(sub => new SubGroupDTO
+            {
+            Id=sub.Id,
+            SubGroupName = sub.SubGroupName
+            }).ToList();
+            return subGroups;
         }
     }
 }

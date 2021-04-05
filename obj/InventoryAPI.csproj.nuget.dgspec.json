@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Inventory\\InventoryAPI\\InventoryAPI\\InventoryAPI\\InventoryAPI.csproj": {}
+    "D:\\Inventory\\InventoryAPI\\InventoryAPI\\InventoryAPI\\InventoryAPI\\InventoryAPI.csproj": {}
   },
   "projects": {
-    "D:\\Inventory\\InventoryAPI\\InventoryAPI\\InventoryAPI\\InventoryAPI.csproj": {
+    "D:\\Inventory\\InventoryAPI\\InventoryAPI\\InventoryAPI\\InventoryAPI\\InventoryAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Inventory\\InventoryAPI\\InventoryAPI\\InventoryAPI\\InventoryAPI.csproj",
+        "projectUniqueName": "D:\\Inventory\\InventoryAPI\\InventoryAPI\\InventoryAPI\\InventoryAPI\\InventoryAPI.csproj",
         "projectName": "InventoryAPI",
-        "projectPath": "D:\\Inventory\\InventoryAPI\\InventoryAPI\\InventoryAPI\\InventoryAPI.csproj",
+        "projectPath": "D:\\Inventory\\InventoryAPI\\InventoryAPI\\InventoryAPI\\InventoryAPI\\InventoryAPI.csproj",
         "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "D:\\Inventory\\InventoryAPI\\InventoryAPI\\InventoryAPI\\obj\\",
+        "outputPath": "D:\\Inventory\\InventoryAPI\\InventoryAPI\\InventoryAPI\\InventoryAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -74,7 +74,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[5.0.1, )"
+              "version": "[5.0.2, )"
             }
           },
           "imports": [
@@ -95,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     }

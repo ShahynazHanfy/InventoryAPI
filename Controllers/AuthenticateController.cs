@@ -10,7 +10,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using TrackingSystemAPI.ViewModels;
+using InventoryAPI.ViewModels;
+using InventoryAPI.Models;
 namespace InventoryAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -71,7 +72,7 @@ namespace InventoryAPI.Controllers
                     email = Useremail,
                     UserName = name,
                     role = userRoles,
-                    LoginedUserId = user.Id,
+                    loginedUserId = user.Id,
                     expiration = token.ValidTo
                 });
             }
@@ -85,7 +86,7 @@ namespace InventoryAPI.Controllers
             var userExists = await userManager.FindByNameAsync(model.UserName);
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
-
+            model.UserName = model.UserName.Replace(' ', '_');
             Models.ApplicationUser user = new ApplicationUser()
             {
                 Email = model.Email,
@@ -95,6 +96,12 @@ namespace InventoryAPI.Controllers
             var result = await userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+            if (model.Role == "SuperAdmin")
+            {
+                if (!await roleManager.RoleExistsAsync(UserRoles.SuperAdmin))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.SuperAdmin));
+                await userManager.AddToRoleAsync(user, UserRoles.SuperAdmin);
+            }
             if (model.Role == "Admin")
             {
                 if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
@@ -127,7 +134,8 @@ namespace InventoryAPI.Controllers
             var result = await userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
-
+            if (!await roleManager.RoleExistsAsync(UserRoles.SuperAdmin))
+                await roleManager.CreateAsync(new IdentityRole(UserRoles.SuperAdmin));
             if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
                 await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
             if (!await roleManager.RoleExistsAsync(UserRoles.Employee))

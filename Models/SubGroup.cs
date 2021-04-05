@@ -11,6 +11,7 @@ namespace InventoryAPI.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string   SubGroupName { get; set; }
+        public bool   Activation { get; set; }
         public int GroupId { get; set; }
         [ForeignKey("GroupId")]
         public virtual Group Group { get; set; }

@@ -10,7 +10,13 @@ namespace InventoryAPI.Models
     {
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public string SerialNumber { get; set; }
+        public string Brand { get; set; }
+        public string Bar_code { get; set; }
+        public string Description { get; set; }
+        public int Price { get; set; }
         public string ItemName { get; set; }
+        public string Photo { get; set; }
         public int SubGroupId { get; set; }
         [ForeignKey("SubGroupId")]
         public virtual SubGroup SubGroup { get; set; }

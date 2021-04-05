@@ -20,7 +20,10 @@ namespace InventoryAPI.Models
         public DbSet<Group> Groups { get; set; }
         public DbSet<SubGroup> SubGroups { get; set; }
         public DbSet<Item> Items { get; set; }
-        public DbSet<InventoryAPI.DTO.GroupDTO> GroupDTO { get; set; }
+        public DbSet<ItemDocuments> ItemDocuments { get; set; }
+        public DbSet<Status> Statuses { get; set; }
+        public DbSet<ItemStatusEmp> ItemStatusEmps { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
 
     }

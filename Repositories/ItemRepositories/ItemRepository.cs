@@ -15,13 +15,16 @@ namespace InventoryAPI.Repositories.ItemRepositories
         {
             _context = context;
         }
-        public void Add(Item item)
+        public int Add(Item item)
         {
             var itemObj = new Item();
             //item.Id = itemObj.Id;
             itemObj.ItemName = item.ItemName;
             itemObj.SubGroupId = item.SubGroupId;
+            itemObj.Photo = item.Photo;
             _context.Items.Add(itemObj);
+            _context.SaveChanges();
+            return itemObj.Id;
         }
 
 
@@ -33,8 +36,8 @@ namespace InventoryAPI.Repositories.ItemRepositories
 
         public Item Find(int id)
         {
-            Item item = _context.Items.Find(id);
-            return item;
+
+            return _context.Items.Find(id); 
         }
 
         public IEnumerable<ItemDTO> GetAll()
@@ -44,7 +47,8 @@ namespace InventoryAPI.Repositories.ItemRepositories
                 Id = e.Id,
                 ItemName = e.ItemName,
                 SubGroupId = e.SubGroupId,
-                SubGroupName = e.SubGroup.SubGroupName
+                SubGroupName = e.SubGroup.SubGroupName,
+                Photo = e.Photo
                 
             }).ToList();
             return items;
@@ -52,13 +56,14 @@ namespace InventoryAPI.Repositories.ItemRepositories
 
         public ItemDTO GetById(int id)
         {
-            var item = _context.Items.Include(c => c.SubGroupId).FirstOrDefault(e => e.Id == id);
+            var item = _context.Items.Include(c => c.SubGroup).FirstOrDefault(e => e.Id == id);
             var itemDTO = new ItemDTO
             {
                 Id = item.Id,
                 SubGroupId = item.SubGroupId,
                 SubGroupName = item.SubGroup.SubGroupName,
-                ItemName = item.ItemName
+                ItemName = item.ItemName,
+                Photo = item.Photo
             };
             return itemDTO;
             
@@ -71,7 +76,7 @@ namespace InventoryAPI.Repositories.ItemRepositories
 
         public void Update(ItemDTO item)
         {
-            var itemDTO = new ItemDTO();
+            var itemDTO = new Item();
             itemDTO.Id = item.Id;
             itemDTO.ItemName = item.ItemName;
             itemDTO.SubGroupId = item.SubGroupId;

@@ -12,8 +12,9 @@ namespace InventoryAPI.Repositories.ItemRepositories
     {
         IEnumerable<ItemDTO> GetAll();
         ItemDTO GetById(int id);
+        
         Item Find(int id);
-        void Add(Item item);
+        int Add(Item item);
         void Update(ItemDTO item);
         void Delete(int id);
         void Save();

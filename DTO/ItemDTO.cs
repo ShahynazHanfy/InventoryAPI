@@ -10,6 +10,7 @@ namespace InventoryAPI.DTO
         public int Id { get; set; }
         public string ItemName { get; set; }
         public int SubGroupId { get; set; }
+        public string Photo { get; set; }
         public string SubGroupName { get; set; }
     }
 }
